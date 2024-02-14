@@ -1,12 +1,12 @@
 pipeline {
     agent { docker { image 'python:3.12.1-alpine3.19' } }
-    parameter{
+    parameters{
             string(defaultValue: "", description: 'Enter macro names', name: 'MACRO_LIST')
     }
     stages {
         stage('build') {
             steps {
-                sh 'python /src/main/core/MacroRunner.py'
+                sh 'python /src/main/core/MacroRunner.py --macro ${packageType}'
             }
         }
     }
