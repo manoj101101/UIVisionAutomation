@@ -15,8 +15,7 @@ import os
 import subprocess
 import sys
 import time
-
-from src.main.logger.Logger import Logger
+from src.main.logger import Logger
 
 
 # function to create a process for opening the browser...
