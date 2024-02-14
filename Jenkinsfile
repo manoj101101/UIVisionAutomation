@@ -2,12 +2,27 @@ pipeline {
 agent any
     parameters{
             string(defaultValue: "", description: 'Enter macro names', name: 'MACRO_LIST')
+            string(defaultValue: "/usr/local/bin/", description: 'Enter macro names', name: 'PYTHON_PATH')
+            string(defaultValue: "", description: 'Enter macro names', name: '/Users/manoj.mathpal/Documents/GitHub/UIVisionAutomation')
     }
+
+        environment {
+        jobParams = parseJobName()
+        PYTHON_PATH = '/usr/local/bin/python3.12'
+        SCRIPT_PATH = '/Users/manoj.mathpal/Documents/GitHub/UIVisionAutomation/src/main/core/'
+       }
+
     stages {
         stage('build') {
+
             steps {
-                sh 'cd /Users/manoj.mathpal/Documents/GitHub/UIVisionAutomation'
-                sh '/usr/local/bin/python3.12 /src/main/core/MacroRunner.py --macro ${MACRO_LIST}'
+
+            script {
+
+            sh '${PYTHON_PATH}  ${SCRIPT_PATH} --macro ${MACRO_LIST}'
+
+            }
+
             }
         }
     }
@@ -29,9 +44,4 @@ agent any
             echo 'For example, if the Pipeline was previously failing but is now successful'
         }
     }
-}
-
-def parseJobName () {
-def params = [:]
-params["MACRO_LIST"] = "${env.MACRO_LIST}"
 }
