@@ -1,0 +1,75 @@
+Status=OK
+###
+[status] Playing macro /macros/StandardBookingE2EJourneyWithFinance.json
+[info] Executing:  | selectWindow | TAB=OPEN | https://ad-customer-website.dev.ackodrive.com/ | 
+[info] Executing:  | store | true | !ErrorIgnore | 
+[info] Executing:  | verifyElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | run | verifySuccessfulLogin |  | 
+[status] Running 'verifySuccessfulLogin', called by '/macros/StandardBookingE2EJourneyWithFinance.json'
+[status] Playing macro verifySuccessfulLogin
+[info] Executing:  | waitForElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | click | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | csvRead | login.csv |  | 
+[info] Executing:  | store | ${!COL2} | phoneNumber | 
+[info] Executing:  | store | ${!COL4} | query | 
+[info] Executing:  | type | xpath=//*[@data-testid='mobilenumber'] | ${phoneNumber} | 
+[info] Executing:  | click | xpath=//*[@data-testid='get_otp_cta'] |  | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | selectWindow | TAB=OPEN | https://workspace.dev.ackodrive.com/explorer/play/ | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | store | true | !ErrorIgnore | 
+[info] Executing:  | verifyElementPresent | xpath=//label[text()='Username:'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | type | xpath=//*[@id='id_username'] | ackodrivetwteam@acko.tech | 
+[info] Executing:  | type | xpath=//*[@id='id_password'] | acko123 | 
+[info] Executing:  | click | xpath=//button[text()='Sign In'] |  | 
+[warning] Element found with secondary locator "xpath=//*[@id="login-form"]/div[3]/input". To use it by default, update the target field to use it as primary locator.
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | end |  |  | 
+[info] Executing:  | type | xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea | ${query} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[@id='refresh_play_button'] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | storeText | xpath=//*[@id="preview"]/tbody/tr/td[2] | otp | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | echo | ${otp} | green | 
+[error][ignored] variable "OTP" is not defined
+[info] Executing:  | executeScript_Sandbox | var array = ${otp}; return array; | ary | 
+[error][ignored] variable "OTP" is not defined
+[info] Executing:  | echo | ${ary} | green | 
+[error][ignored] variable "ARY" is not defined
+[info] Executing:  | executeScript_Sandbox | var num=${ary[0]}; return num; | num1 | 
+[error][ignored] variable "ARY" is not defined
+[info] Executing:  | executeScript_Sandbox | var num=${ary[1]}; return num; | num2 | 
+[error][ignored] variable "ARY" is not defined
+[info] Executing:  | executeScript_Sandbox | var num=${ary[2]}; return num; | num3 | 
+[error][ignored] variable "ARY" is not defined
+[info] Executing:  | executeScript_Sandbox | var num=${ary[3]}; return num; | num4 | 
+[error][ignored] variable "ARY" is not defined
+[info] Executing:  | deleteAllCookies |  |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | selectWindow | tab=close |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Please enter verification code. Digit 1'] | ${num1} | 
+[error][ignored] variable "NUM1" is not defined
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 2'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 2'] | ${num2} | 
+[error][ignored] variable "NUM2" is not defined
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 3'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 3'] | ${num3} | 
+[error][ignored] variable "NUM3" is not defined
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 4'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 4'] | ${num4} | 
+[error][ignored] variable "NUM4" is not defined
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | click | xpath=//*[@id="profileEdit"] |  | 
+[error][ignored] timeout reached when looking for element 'xpath=//*[@id="profileEdit"]'
+[info] Executing:  | assertText | xpath=//*[@id='__next']/div/div/div[2]/nav/div[6]/div/div | Logout | 
+[error][ignored] timeout reached when looking for element 'xpath=//*[@id='__next']/div/div/div[2]/nav/div[6]/div/div'
+[info] Executing:  | echo | ***************************** Verify successful login test run is successful *******************  | green | 
+[echo] ***************************** Verify successful login test run is successful *******************
+[status] Finished running 'verifySuccessfulLogin', returning to '/macros/StandardBookingE2EJourneyWithFinance.json'
+[status] Playing macro /macros/StandardBookingE2EJourneyWithFinance.json
+[info] Executing:  | end |  |  | 
+[info] Executing:  | click | xpath=//div[@class='styles__Wrapper-sc-6293987-0 jaGmVS'] |  | 
+[info] Macro was stopped manually (Runtime 37.87s)

@@ -1,0 +1,175 @@
+Status=OK
+###
+[status] Playing macro /macros/StandardBookingE2EJourneyWithoutFinance.json
+[info] Executing:  | selectWindow | TAB=OPEN | https://ad-customer-website.uat.ackodrive.com/ | 
+[info] Executing:  | store | true | !ErrorIgnore | 
+[info] Executing:  | verifyElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | echo | status = ${!statusOK} | red | 
+[echo] status = true
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | run | verifySuccessfulLogin |  | 
+[status] Running 'verifySuccessfulLogin', called by '/macros/StandardBookingE2EJourneyWithoutFinance.json'
+[status] Playing macro verifySuccessfulLogin
+[info] Executing:  | waitForElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | click | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | csvRead | login.csv |  | 
+[info] Executing:  | store | ${!COL2} | phoneNumber | 
+[info] Executing:  | store | ${!COL4} | query | 
+[info] Executing:  | type | xpath=//*[@data-testid='mobilenumber'] | ${phoneNumber} | 
+[info] Executing:  | click | xpath=//*[@data-testid='get_otp_cta'] |  | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | selectWindow | TAB=OPEN | https://workspace.dev.ackodrive.com/explorer/play/ | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | store | true | !ErrorIgnore | 
+[info] Executing:  | verifyElementPresent | xpath=//label[text()='Username:'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | type | xpath=//*[@id='id_username'] | ackodrivetwteam@acko.tech | 
+[info] Executing:  | type | xpath=//*[@id='id_password'] | acko123 | 
+[info] Executing:  | click | xpath=//button[text()='Sign In'] |  | 
+[warning] Element found with secondary locator "xpath=//*[@id="login-form"]/div[3]/input". To use it by default, update the target field to use it as primary locator.
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | end |  |  | 
+[info] Executing:  | type | xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea | ${query} | 
+[info] Executing:  | click | xpath=//*[@id='refresh_play_button'] |  | 
+[info] Executing:  | storeText | xpath=//*[@id="preview"]/tbody/tr/td[2] | otp | 
+[info] Executing:  | echo | ${otp} | green | 
+[echo] 3429
+[info] Executing:  | executeScript_Sandbox | var array = ${otp}; return array; | ary | 
+[info] Executing:  | echo | ${ary} | green | 
+[echo] 3429
+[info] Executing:  | executeScript_Sandbox | var num=${ary[0]}; return num; | num1 | 
+[info] Executing:  | executeScript_Sandbox | var num=${ary[1]}; return num; | num2 | 
+[info] Executing:  | executeScript_Sandbox | var num=${ary[2]}; return num; | num3 | 
+[info] Executing:  | executeScript_Sandbox | var num=${ary[3]}; return num; | num4 | 
+[info] Executing:  | deleteAllCookies |  |  | 
+[info] Executing:  | selectWindow | tab=close |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Please enter verification code. Digit 1'] | ${num1} | 
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 2'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 2'] | ${num2} | 
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 3'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 3'] | ${num3} | 
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 4'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 4'] | ${num4} | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | click | xpath=//*[@id="profileEdit"] |  | 
+[error][ignored] timeout reached when looking for element 'xpath=//*[@id="profileEdit"]'
+[info] Executing:  | assertText | xpath=//*[@id='__next']/div/div/div[2]/nav/div[6]/div/div | Logout | 
+[error][ignored] timeout reached when looking for element 'xpath=//*[@id='__next']/div/div/div[2]/nav/div[6]/div/div'
+[info] Executing:  | echo | ***************************** Verify successful login test run is successful *******************  | green | 
+[echo] ***************************** Verify successful login test run is successful *******************
+[status] Finished running 'verifySuccessfulLogin', returning to '/macros/StandardBookingE2EJourneyWithoutFinance.json'
+[status] Playing macro /macros/StandardBookingE2EJourneyWithoutFinance.json
+[info] Executing:  | end |  |  | 
+[info] Executing:  | click | xpath=//div[text()='Click here to change your city'] |  | 
+[error][ignored] timeout reached when looking for element 'xpath=//div[text()='Click here to change your city']'
+[info] Executing:  | click | xpath=//img[@alt='Bangalore'] |  | 
+[error][ignored] timeout reached when looking for element 'xpath=//img[@alt='Bangalore']'
+[info] Executing:  | clickAndWait | xpath=//*[@id="cars-list-container"]/div/div[2]/div/div[2]/div[3]/div/a/div/span/img |  | 
+[error][ignored] No tab with id: 1809031728.
+[info] Executing:  | click | linkText=See details@POS=22 |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[@id="__next"]/div/div[2]/div/div[2]/div/div[2]/div/div/a[10]/div[2] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | pause | 3000 |  | 
+[info] Executing:  | csvRead | tataPunchBangaloreStandardDeliveryWithoutFinance.csv |  | 
+[info] Executing:  | click | xpath=//span[text()='Other delivery options '] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[contains(text(),'Standard Delivery')] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[contains(text(),'Choose')] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | click | xpath=//div[text()='view full breakup'] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL6} | ackoDrivePriceOnTopOfBreakup | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[1]/div/span[2] | ${ackoDrivePriceOnTopOfBreakup} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL10} | mmvName | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[1]/div[1]/div[1]/div[1]/h1 | ${mmvName} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | storeText | xpath=//*[@id="__next"]/div/div[2]/div/div[2]/div/div/h2/span | colour | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | storeText | xpath=//*[@id="__next"]/div/div[2]/div/div[2]/div/div/h2/span | getColour | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | echo | ${getColour} | red | 
+[error][ignored] variable "GETCOLOUR" is not defined
+[info] Executing:  | echo | colour | green | 
+[echo] colour
+[info] Executing:  | assert | getColour | ${colour} | 
+[error][ignored] variable "COLOUR" is not defined
+[info] Executing:  | store | ${!COL14} | exShowroomPrice | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/span[2] | ${exShowroomPrice} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL16} | registrationAmount | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[2]/span[2] | ${registrationAmount} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL18} | OnRoadPrice | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[5]/span[2]/span | ${OnRoadPrice} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL20} | ackoDriveSavings | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[6]/span[2]/span | ${ackoDriveSavings} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL22} | ackoDrivePriceUnderBreakup | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[3]/div[1]/div[7]/span[2]/span | ${ackoDrivePriceUnderBreakup} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL24} | carLoanText | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[2]/div[1]/div[4]/div[1]/h2 | ${carLoanText} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL26} | allColours | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[1]/div[2]/div/div[1]/div/span | ${allColours} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL28} | otherVariants | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div[2]/div[1]/div[3]/div/div[1]/h2 | ${otherVariants} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[@id="specs"] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL30} | specificationHeading | 
+[info] Executing:  | assertText | xpath=//*[@id="specs"]/h2 | ${specificationHeading} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL32} | featuresHeading | 
+[info] Executing:  | assertText | xpath=//*[@id="features"]/div/h2 | ${featuresHeading} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[@data-testid='mmv_login_to_save_CTA'] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[contains(text(),'Not interested')] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL34} | finalPrice | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div/div[2]/div[2]/div[1]/div[1]/div[2] | ${finalPrice} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL36} | bookingAmount | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div/div[2]/div[2]/div[5]/div[1]/div | ${bookingAmount} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL 38} | termsText | 
+[info] Executing:  | click | xpath=//*[@id="__next"]/div/div/div[2]/div[2]/div[5]/div[2]/div |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | xpath=//*[@id="1000132"]/article |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | click | id=1000299 |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | pause | 1000 |  | 
+[info] Executing:  | click | xpath=//button[contains(text(), 'Success')] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | store | ${!COL40} | remainingAmount | 
+[info] Executing:  | assertText | xpath=/html/body/div[1]/div/div/div[3]/div[1]/div[1]/div[2]/div[4]/div[2] | ${remainingAmount} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL42} | transmission | 
+[info] Executing:  | verifyText | xpath=/html/body/div[1]/div/div/div[3]/div[1]/div[1]/div[1]/div/div/div[2] | Automatic | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL44} | bodyType | 
+[info] Executing:  | verifyText | xpath=/html/body/div[1]/div/div/div[3]/div[1]/div[1]/div[1]/div/div/div[2] | ${bodyType} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | store | ${!COL46} | fuelType | 
+[info] Executing:  | verifyText | xpath=/html/body/div[1]/div/div/div[3]/div[1]/div[1]/div[1]/div/div/div[2] | ${fuelType} | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | assertText | xpath=//div[text()='Booking successful'] | Booking successful | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | assertText | xpath=//div[text()='Tata Punch Creative iRA AMT'] | Tata Punch Creative iRA AMT | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | verifyElementNotPresent | xpath=//div[text()='Express Delivery'] |  | 
+[error][ignored] Error #101: UI.Vision RPA is not connected to a browser tab
+[info] Executing:  | bringBrowserToForeground |  |  | 
+[info] Executing:  | XType | ${KEY_CMD+KEY_T} |  | 
+[info] Executing:  | selectWindow | tab=0 |  | 
+[info] Executing:  | deleteAllCookies |  |  | 
+[info] Macro was stopped manually (Runtime 80.81s)
