@@ -6,7 +6,7 @@ agent any
     stages {
         stage('build') {
             steps {
-                sh 'python /src/main/core/MacroRunner.py --macro ${packageType}'
+                sh '/usr/local/bin/python3.12 /src/main/core/MacroRunner.py --macro ${MACRO_LIST}'
             }
         }
     }
