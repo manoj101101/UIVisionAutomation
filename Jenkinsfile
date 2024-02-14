@@ -6,7 +6,7 @@ agent any
     stages {
         stage('build') {
             steps {
-                sh '/usr/local/bin/python3.12 /src/main/core/MacroRunner.py --macro ${MACRO_LIST}'
+                sh '/usr/local/bin/python3.12 /Users/manoj.mathpal/Documents/GitHub/UIVisionAutomation/src/main/core/MacroRunner.py --macro ${MACRO_LIST}'
             }
         }
     }
