@@ -1,4 +1,5 @@
 pipeline {
+agent any
     parameters{
             string(defaultValue: "", description: 'Enter macro names', name: 'MACRO_LIST')
     }
