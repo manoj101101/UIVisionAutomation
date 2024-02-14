@@ -11,7 +11,6 @@ __author__ = 'Manoj Mathpal'
 
 import argparse
 import datetime
-import logging
 import os
 import subprocess
 import sys
