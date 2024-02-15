@@ -19,7 +19,6 @@ class Logger:
         print("logfile which is coming as an input>>>>>>>>>")
         print(log_file)
         print("adding log folder+logfile>>>>>>>>>")
-        print(log_folder + log_file)
         log_file_path = log_folder + log_file
         # log_file_path = os.path.join(log_folder, log_file)
         print("final log file path------>")

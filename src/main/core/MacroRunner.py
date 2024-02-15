@@ -101,7 +101,7 @@ def run_macros(args):
     }
 
     for macro_name in macro_names:
-        log_file = str(macro_name)+'_logs_'+str({datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S")})+'.txt'
+        log_file = str(macro_name)+'_logs_'+str(datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S"))+'.txt'
         print("SENDING LOG FILE------------> ")
         print(log_file)
         logger, log_file_path = Logger.Logger.setup_logger(log_file)
