@@ -8,9 +8,11 @@ class Logger:
     @staticmethod
     def setup_logger(log_file):
         projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
-
+        print("projectpath==")
+        print(projectpath)
         log_folder = os.path.join(projectpath, 'logs')
-
+        print("logfolder==")
+        print(log_folder)
         if not os.path.exists(log_folder):
             os.makedirs(log_folder)
 
