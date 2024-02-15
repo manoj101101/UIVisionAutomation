@@ -11,9 +11,9 @@ pipeline {
                 script {
                     def workspacePath = "${WORKSPACE}/src/main/core/"
                     def pythonExecutable = "/usr/local/bin/python3.12"
-
+                    dir(workspacePath) {
                         sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
-
+                    }
                 }
             }
         }
