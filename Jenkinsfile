@@ -2,14 +2,7 @@ pipeline {
 agent any
     parameters{
             string(defaultValue: "", description: 'Enter macro names', name: 'MACRO_LIST')
-            string(defaultValue: "/usr/local/bin/", description: 'Enter macro names', name: 'PYTHON_PATH')
-            string(defaultValue: "", description: 'Enter macro names', name: 'SCRIPT_PATH')
     }
-
-        environment {
-        PYTHON_PATH = '/usr/local/bin/python3.12'
-        SCRIPT_PATH = '/Users/manoj.mathpal/Documents/GitHub/UIVisionAutomation/src/main/core/MacroRunner.py'
-       }
 
     stages {
         stage('build') {
@@ -17,9 +10,8 @@ agent any
             steps {
 
             script {
-
-            sh '${PYTHON_PATH}  ${SCRIPT_PATH} --macro ${MACRO_LIST}'
-
+            sh cd '${macro_script_path}'
+            sh 'python3.12 --macro ${MACRO_LIST}'
             }
 
             }

@@ -15,28 +15,31 @@ import os
 import subprocess
 import sys
 import time
-import logging
+import Logger
 
 
-def setup_logger(log_file):
-    projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
+# import logging
 
-    log_folder = os.path.join(projectpath, 'logs')
 
-    if not os.path.exists(log_folder):
-        os.makedirs(log_folder)
-
-    log_file_path = os.path.join(log_folder, log_file)
-
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s - [%(threadName)-12.12s] - %(levelname)s - %(message)s')
-
-    stream_handler = logging.StreamHandler(sys.stdout);
-    stream_handler.setFormatter(formatter)
-    logger.addHandler(stream_handler)
-
-    return logger, log_file_path
+# def setup_logger(log_file):
+#     projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
+#
+#     log_folder = os.path.join(projectpath, 'logs')
+#
+#     if not os.path.exists(log_folder):
+#         os.makedirs(log_folder)
+#
+#     log_file_path = os.path.join(log_folder, log_file)
+#
+#     logger = logging.getLogger(__name__)
+#     logger.setLevel(logging.DEBUG)
+#     formatter = logging.Formatter('%(asctime)s - [%(threadName)-12.12s] - %(levelname)s - %(message)s')
+#
+#     stream_handler = logging.StreamHandler(sys.stdout);
+#     stream_handler.setFormatter(formatter)
+#     logger.addHandler(stream_handler)
+#
+#     return logger, log_file_path
 
 # function to create a process for opening the browser...
 def open_browser(browser_path, path, macro_params, incognito=False):
@@ -96,7 +99,7 @@ def run_macros(args):
 
     for macro_name in macro_names:
         log_file = f"{macro_name}_logs_{datetime.datetime.now().strftime('%m-%d-%Y_%H_%M_%S')}.txt"
-        logger, log_file_path = setup_logger(log_file)
+        logger, log_file_path = Logger.Logger.setup_logger(log_file);
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)

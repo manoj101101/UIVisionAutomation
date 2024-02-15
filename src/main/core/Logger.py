@@ -6,7 +6,7 @@ import sys
 class Logger:
 
 
-    def __init__(log_file):
+    def setup_logger(log_file):
         projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
 
         log_folder = os.path.join(projectpath, 'logs')
