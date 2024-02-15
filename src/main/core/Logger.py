@@ -15,8 +15,8 @@ class Logger:
         print(log_folder)
         if not os.path.exists(log_folder):
             os.makedirs(log_folder)
-
-        log_file_path = os.path.join(log_folder, log_file)
+        log_file_path = log_folder + log_file
+        # log_file_path = os.path.join(log_folder, log_file)
         print("final log file path------>")
         print(log_file_path)
         logger = logging.getLogger(__name__)
