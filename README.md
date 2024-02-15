@@ -24,18 +24,18 @@ Project will have a jenkinsFile which can be used for controlling and monitoring
 
 ***How to Run Your Macros On Jenkins***
 
-1.Just Create a new pipiline of type pipeline only.
+1. Just Create a new pipiline of type pipeline only.
 
-2.Configure Git repository.
+2. Configure Git repository.
 
-3.Configure Build with Parameter : {MACRO_LIST} : Enter macro names.
+3. Configure Build with Parameter : {MACRO_LIST} : Enter macro names.
 
-4.Build.
+4. Build.
 
 ***Notes:***
 
-1.For Macro's better execution run use locators such as : ID, testID or Dynamic xpaths. 
+1. For Macro's better execution run use locators such as : ID, testID or Dynamic xpaths. 
 
-2.When providing multiple macro names remember to put a single space between each macro name.
+2. When providing multiple macro names remember to put a single space between each macro name.
 
 **(You can ask dev team to add the ids or testid in the elements that are required)** 
