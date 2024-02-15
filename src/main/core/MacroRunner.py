@@ -21,37 +21,14 @@ import Logger
 # import logging
 
 
-# def setup_logger(log_file):
-#     projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
-#
-#     log_folder = os.path.join(projectpath, 'logs')
-#
-#     if not os.path.exists(log_folder):
-#         os.makedirs(log_folder)
-#
-#     log_file_path = os.path.join(log_folder, log_file)
-#
-#     logger = logging.getLogger(__name__)
-#     logger.setLevel(logging.DEBUG)
-#     formatter = logging.Formatter('%(asctime)s - [%(threadName)-12.12s] - %(levelname)s - %(message)s')
-#
-#     stream_handler = logging.StreamHandler(sys.stdout);
-#     stream_handler.setFormatter(formatter)
-#     logger.addHandler(stream_handler)
-#
-#     return logger, log_file_path
-
 # function to create a process for opening the browser...
 def open_browser(browser_path, path, macro_params, incognito=False):
-    print(">>>>>>>>>>>>>> " + path)
     args = (
             r'file:///' + macro_params['path_autorun_html'] +
             '?macro=' + macro_params['macro'] +
             '&closeRPA=0&direct=1&storage=xfile&loadmacrotree=1&savelog=' + path
     )
     proc = subprocess.Popen([browser_path, args])
-    print(">>>>>>>>>>>>>>")
-    print(proc.stdout)
     return proc
 
 
@@ -75,7 +52,7 @@ def check_macro_status(log_file_path, logger, macro_name):
             logger.info(f"Macro '{macro_name}' passed.")
         else:
             logger.error(f"Macro '{macro_name}' failed. See logs for details.")
-            sys.exit(-2)
+            sys.exit()
 
 
 def macrorunner(macro_params, logger, log_file_path):
@@ -101,11 +78,9 @@ def run_macros(args):
     }
 
     for macro_name in macro_names:
-        log_file = str(os.path.basename(macro_name))+'_logs_'+str(datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S"))+'.txt'
-        print("SENDING LOG FILE------------> ")
-        print(log_file)
+        log_file = str(os.path.basename(macro_name)) + '_logs_' + str(
+            datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S")) + '.txt'
         logger, log_file_path = Logger.Logger.setup_logger(log_file)
-        print("logfilepath>>>>>>>>> " + log_file_path)
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)
