@@ -14,7 +14,6 @@ agent any
             echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             def workspacePath = "${WORKSPACE}/src/main/core/"
             sh "cd ${workspacePath}"
-            sh 'cd ${env.macro_script_path}'
             sh 'python3.12 --macro ${MACRO_LIST}'
             }
 
