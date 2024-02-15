@@ -16,7 +16,7 @@ pipeline {
                     dir(workspacePath) {
                         echo "==========="
                         echo "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
-                        "${pythonExecutable}" MacroRunner.py --macro "${MACRO_LIST}"
+                        sh "${pythonExecutable}" MacroRunner.py --macro "${MACRO_LIST}"
                     }
                 }
             }
