@@ -6,20 +6,17 @@ agent any
 
     stages {
         stage('build') {
-
-            steps {
-
-            script {
-            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            def workspacePath = "${WORKSPACE}/src/main/core/"
-            echo ">>>>>>${workspacePath}"
-            sh "cd ${workspacePath}"
-            def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
-            echo ">>>>>>${pythonExecutable}"
-            sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+          steps {
+               script {
+                     def workspacePath = "${WORKSPACE}/src/main/core/"
+                     echo ">>>>>>${workspacePath}"
+                     dir(workspacePath) {
+                     def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
+                     echo ">>>>>>${pythonExecutable}"
+                     sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
             }
 
-            }
+          }
         }
     }
         post {
