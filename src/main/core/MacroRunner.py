@@ -43,12 +43,15 @@ import Logger
 
 # function to create a process for opening the browser...
 def open_browser(browser_path, path, macro_params, incognito=False):
+    print(">>>>>>>>>>>>>> " + path)
     args = (
             r'file:///' + macro_params['path_autorun_html'] +
             '?macro=' + macro_params['macro'] +
             '&closeRPA=0&direct=1&storage=xfile&loadmacrotree=1&savelog=' + path
     )
     proc = subprocess.Popen([browser_path, args])
+    print(">>>>>>>>>>>>>>")
+    print(proc.stdout)
     return proc
 
 
@@ -99,7 +102,8 @@ def run_macros(args):
 
     for macro_name in macro_names:
         log_file = f"{macro_name}_logs_{datetime.datetime.now().strftime('%m-%d-%Y_%H_%M_%S')}.txt"
-        logger, log_file_path = Logger.Logger.setup_logger(log_file);
+        logger, log_file_path = Logger.Logger.setup_logger(log_file)
+        print("logfilepath>>>>>>>>> " + log_file_path)
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)

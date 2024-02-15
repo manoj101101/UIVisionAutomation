@@ -5,7 +5,7 @@ import sys
 
 class Logger:
 
-
+    @staticmethod
     def setup_logger(log_file):
         projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
 
@@ -29,4 +29,3 @@ class Logger:
 
 def get_logger(self):
     return self.logger
-
