@@ -11,10 +11,10 @@ agent any
 
             script {
             echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             def workspacePath = "${WORKSPACE}/src/main/core/"
             sh "cd ${workspacePath}"
-            sh 'python3.12 --macro ${MACRO_LIST}'
+            def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
+            sh "${pythonExecutable} --macro ${MACRO_LIST}"
             }
 
             }
