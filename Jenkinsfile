@@ -11,11 +11,10 @@ pipeline {
                 script {
                     def workspacePath = "${WORKSPACE}/src/main/core/"
                     echo "--------1>${workspacePath}"
-
+                    def pythonExecutable = "/usr/local/bin/python3.12"
+                    echo "--------2>${pythonExecutable}"
                     dir(workspacePath) {
-                        def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
-                        echo "--------2>${pythonExecutable}"
-                        "${pythonExecutable}" MacroRunner.py --macro "${MACRO_LIST}"
+                        "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
                     }
                 }
             }
