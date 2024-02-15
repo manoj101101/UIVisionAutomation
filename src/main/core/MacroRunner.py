@@ -23,7 +23,7 @@ def open_browser(browser_path, path, macro_params, incognito=False):
     args = (
             r'file:///' + macro_params['path_autorun_html'] +
             '?macro=' + macro_params['macro'] +
-            '&closeRPA=0&direct=1&storage=xfile&loadmacrotree=1&savelog=' + path
+            '&closeRPA=1&closeBrowser=1&direct=1&storage=xfile&loadmacrotree=1&savelog=' + path
     )
     proc = subprocess.Popen([browser_path, args])
     return proc
