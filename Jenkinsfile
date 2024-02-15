@@ -1,25 +1,28 @@
 pipeline {
-agent any
-    parameters{
-            string(defaultValue: "/Users/manoj.mathpal/Desktop/uivis/macros/AckoDrive/verifySuccessfulLogout", description: 'Enter macro names', name: 'MACRO_LIST')
+    agent any
+
+    parameters {
+        string(defaultValue: "/Users/manoj.mathpal/Desktop/uivis/macros/AckoDrive/verifySuccessfulLogout", description: 'Enter macro names', name: 'MACRO_LIST')
     }
 
     stages {
         stage('build') {
-          steps {
-               script {
-                     def workspacePath = "${WORKSPACE}/src/main/core/"
-                     echo ">>>>>>${workspacePath}"
-                     dir(workspacePath) {
-                     def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
-                     echo ">>>>>>${pythonExecutable}"
-                     sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
-            }
+            steps {
+                script {
+                    def workspacePath = "${WORKSPACE}/src/main/core/"
+                    echo ">>>>>>${workspacePath}"
 
-          }
+                    dir(workspacePath) {
+                        def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
+                        echo ">>>>>>${pythonExecutable}"
+                        sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+                    }
+                }
+            }
         }
     }
-        post {
+
+    post {
         always {
             echo 'This will always run'
         }
