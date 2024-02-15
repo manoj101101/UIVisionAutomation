@@ -10,7 +10,7 @@ class Logger:
         projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
         print("projectpath==")
         print(projectpath)
-        log_folder = os.path.join(projectpath, 'logs')
+        log_folder = os.path.join(projectpath, 'logs/')
         print("logfolder==")
         print(log_folder)
 
