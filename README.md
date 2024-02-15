@@ -1,42 +1,41 @@
-*** UI Vision automation script is written in python, 
+*** UI Vision Automation Script ***
 
-Capability to run mutiple macros in the browser using command line arguments, it takes a argument as a list named as 
---macro in which so you can provide multiple macroname with spaces, can use multiple arguments as per requirement.
+***Tech Stack***
+** Python + pycharm + Scipting + Command line + Jenkins + Groovy + Git.
 
-Macros will be feched from hard drive, it is configurable.
+Capability to run mutiple macros in the browser using command line arguments
+In current implementation you can pass a list as a parameter, which will contain the name of the macros you want to run.
+It can be configured in other ways also like passing folders or html files.
 
-All the paths created and  used are mostly dynamic in nature will be common for everyone using MAC machines.
+Macros will be fetched from the hard drive, where UI vision root folder is configured by the user, which is also configurable.
+
+All the paths created and used are mostly dynamic in nature will be common for everyone who are using MAC machines.
 
 **Jenkins integration using SCM (Groovy Script)** : 
-Project will have a jenkinsFile which can be used for controlling and monitoring the execution flow of macros.
+
+Project will have a jenkinsFile which can be used for controlling and monitoring the execution flow of script.
 ***
 
-**Tech Stack**
-** Python + pycharm + Scipting + Command line + Run Multiple Macros + Jenkins + Groovy.
+***Multiple parameters*** :
 
-**Command line argument**
-** --macro macro1name macro2name macro3name --incognito #(if you want to run browser in incognito mode)#
+1. --macro macro1name macro2name macro3name 2. --incognito #(if you want to run browser in incognito mode)#
+3. -- headless mode #(to run browser in headless mode)
+4. -- userProfile #(to run browser with different profiles)
 
-**How to Run Your Macros On Jenkins**
+***How to Run Your Macros On Jenkins***
 
 1.Just Create a new pipiline of type pipeline only.
 
 2.Configure Git repository.
 
-3.Configure Build with Parameter : {MACRO_LIST} : Enter the macros names, put single space in between the names of multiple macros. 
-
-**(Can also be done for a testSuiteFolder for that we can seperate the test cases in different folders LOB wise)**
+3.Configure Build with Parameter : {MACRO_LIST} : Enter macro names.
 
 4.Build.
 
-**Note:**
+***Notes:***
 
 1.For Macro's better execution run use locators such as : ID, testID or Dynamic xpaths. 
 
+2.When providing multiple macro names remember to put a single space between each macro name.
+
 **(You can ask dev team to add the ids or testid in the elements that are required)** 
-
-
-
-
-
-
