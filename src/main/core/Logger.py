@@ -17,7 +17,8 @@ class Logger:
             os.makedirs(log_folder)
 
         log_file_path = os.path.join(log_folder, log_file)
-
+        print("final log file path------>")
+        print(log_file_path)
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)s - [%(threadName)-12.12s] - %(levelname)s - %(message)s')
