@@ -14,7 +14,9 @@ pipeline {
                     def pythonExecutable = "/usr/local/bin/python3.12"
                     echo "--------2>${pythonExecutable}"
                     dir(workspacePath) {
-                        "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+                        echo "==========="
+                        echo "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+                        "${pythonExecutable}" MacroRunner.py --macro "${MACRO_LIST}"
                     }
                 }
             }
