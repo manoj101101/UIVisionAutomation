@@ -14,7 +14,8 @@ agent any
             def workspacePath = "${WORKSPACE}/src/main/core/"
             sh "cd ${workspacePath}"
             def pythonExecutable = sh(script: 'which python3.12', returnStdout: true).trim()
-            sh "${pythonExecutable} --macro ${MACRO_LIST}"
+            sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+            sh 'python3.12 --macro ${MACRO_LIST}'
             }
 
             }
