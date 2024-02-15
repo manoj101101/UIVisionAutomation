@@ -10,7 +10,7 @@ agent any
             steps {
 
             script {
-            sh 'cd ${macro_script_path}'
+            sh 'cd ${env.macro_script_path}'
             sh 'python3.12 --macro ${MACRO_LIST}'
             }
 
