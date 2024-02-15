@@ -18,29 +18,6 @@ import time
 import Logger
 
 
-# import logging
-
-
-# def setup_logger(log_file):
-#     projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
-#
-#     log_folder = os.path.join(projectpath, 'logs')
-#
-#     if not os.path.exists(log_folder):
-#         os.makedirs(log_folder)
-#
-#     log_file_path = os.path.join(log_folder, log_file)
-#
-#     logger = logging.getLogger(__name__)
-#     logger.setLevel(logging.DEBUG)
-#     formatter = logging.Formatter('%(asctime)s - [%(threadName)-12.12s] - %(levelname)s - %(message)s')
-#
-#     stream_handler = logging.StreamHandler(sys.stdout);
-#     stream_handler.setFormatter(formatter)
-#     logger.addHandler(stream_handler)
-#
-#     return logger, log_file_path
-
 # function to create a process for opening the browser...
 def open_browser(browser_path, path, macro_params, incognito=False):
     args = (
@@ -54,7 +31,7 @@ def open_browser(browser_path, path, macro_params, incognito=False):
 
 # function to kill the browser process...
 def close_browser(proc):
-    proc.kill()
+    proc.communicate()
 
 
 def wait_for_completion(log_file_path, timeout_seconds):
