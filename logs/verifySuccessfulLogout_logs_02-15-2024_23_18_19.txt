@@ -1,0 +1,27 @@
+Status=Error: timeout reached when looking for element 'xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea'
+###
+[status] Playing macro /Users/manoj.mathpal/Desktop/uivis/macros/AckoDrive/verifySuccessfulLogout.json
+[info] Executing:  | open | https://ad-customer-website.uat.ackodrive.com/ |  | 
+[info] Executing:  | store | true |  | 
+[info] Executing:  | verifyElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | run | verifySuccessfulLogin |  | 
+[status] Running 'verifySuccessfulLogin', called by '/Users/manoj.mathpal/Desktop/uivis/macros/AckoDrive/verifySuccessfulLogout.json'
+[status] Playing macro verifySuccessfulLogin
+[info] Executing:  | waitForElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | click | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | csvRead | login.csv |  | 
+[info] Executing:  | store | ${!COL2} | phoneNumber | 
+[info] Executing:  | store | ${!COL4} | query | 
+[info] Executing:  | type | xpath=//*[@data-testid='mobilenumber'] | ${phoneNumber} | 
+[info] Executing:  | click | xpath=//*[@data-testid='get_otp_cta'] |  | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | selectWindow | TAB=OPEN | https://workspace.uat.ackodrive.com/explorer/play/ | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | store | true |  | 
+[info] Executing:  | verifyElementPresent | xpath=//label[text()='Username:'] |  | 
+[error][ignored] 'xpath=//label[text()='Username:']' element not present
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | waitForElementPresent | xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea |  | 
+[error] timeout reached when looking for element 'xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea'
+[info] Macro failed (Runtime 82.40s)

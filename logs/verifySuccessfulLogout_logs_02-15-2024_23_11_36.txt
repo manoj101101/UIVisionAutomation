@@ -1,0 +1,4 @@
+Status=OK
+###
+[status] Playing macro /Users/manoj.mathpal/Desktop/uivis/macros/AckoDrive/verifySuccessfulLogout.json
+[info] Executing:  | open | https://ad-customer-website.uat.ackodrive.com/ |  | 
