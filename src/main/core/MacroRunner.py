@@ -17,6 +17,8 @@ import sys
 import time
 import Logger
 
+logger = Logger.Logger.setup_logger()
+
 
 # function to create a process for opening the browser...
 def open_browser(browser_path, path, macro_params, incognito=False):
@@ -26,55 +28,63 @@ def open_browser(browser_path, path, macro_params, incognito=False):
             '&closeRPA=1&direct=1&savelog=' + path
     )
     proc = subprocess.Popen([browser_path, args])
+    logger.info(
+        f" Strated a parent process to open browser and run macro : '{macro_params['macro']}'")
+    logger.info(
+        f" Parent process id : '{proc.pid}'")
     return proc
 
 
 # function to kill the browser process...
 def close_browser(proc):
-    print("CLOSING BROWSER")
-    print(proc)
+    logger.info(f" Killig Parent process pid : '{proc.pid}'")
     proc.kill()
 
 
 def wait_for_completion(log_file_path, timeout_seconds):
     status_runtime = 0
-    print("INSIDE WAIT FOR COMPLETION METHOD VALUE OF LOG FILE PATH IS")
-    print(log_file_path)
+    logger.info(f" Waiting for macro to finish the execution : Timeout value : '{timeout_seconds}'")
     while not os.path.exists(log_file_path) and status_runtime < timeout_seconds:
         time.sleep(1)
         status_runtime += 1
-    print("COMING OUTSIDE FROM COMPLETION METHOD VALUE OF LOG FILE PATH IS")
-    print(log_file_path)
     return status_runtime < timeout_seconds
 
 
-def check_macro_status(log_file_path, logger, macro_name):
-    print("INSIDE CHECK MACRO STATUS METHOD VALUE OF LOG FILE PATH IS")
-    print(log_file_path)
+def check_macro_status(log_file_path, macro_name):
+    logger.info(f" Check status of macro execution : macro : '{macro_name}'")
     with open(log_file_path) as f:
         status_text = f.readline()
-        print("MACRO STATUS IS")
-        print(status_text)
         if 'Status=OK' in status_text:
-            print("GOING TO IF OF CHECK MACRO STATUS METHOD")
-            logger.info(f"Macro '{macro_name}' passed.")
+            logger.info(f" Macro '{macro_name}' passed.")
         else:
-            print("GOING TO ELSE OF CHECK MACRO STATUS METHOD")
             logger.error(f"Macro '{macro_name}' failed. See logs for details.")
             sys.exit(-2)
 
 
-def macrorunner(macro_params, logger, log_file_path):
+def macrorunner(macro_params, log_file_path):
     assert os.path.exists(macro_params['path_autorun_html'])
-    logger.info(f"Log File will show up at {log_file_path}")
+    logger.info(f" Log File will show up at {log_file_path}")
 
     if wait_for_completion(log_file_path, macro_params['timeout_seconds']):
-        check_macro_status(log_file_path, logger, macro_params['macro'])
+        check_macro_status(log_file_path, macro_params['macro'])
     else:
-        print("GOING TO ELSE OF MACRORUNNER METHOD")
         status_text = f"Macro '{macro_params['macro']}' did not complete within the time given: {macro_params['timeout_seconds']} seconds"
         logger.error(status_text)
         sys.exit(-2)
+
+
+def macro_logs_setup(macro_name):
+    logger.info(
+        f" '{macro_name}' execution logs will be stored under UI Vision project directory in /logs folder")
+    log_file = macro_name + '_logs_' + str(datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S")) + '.txt'
+    projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    log_folder = os.path.join(projectpath, 'logs/')
+
+    if not os.path.exists(log_folder):
+        os.makedirs(log_folder)
+
+    log_file_path = log_folder + log_file
+    return log_file_path
 
 
 # function run macros...
@@ -88,14 +98,15 @@ def run_macros(args):
     }
 
     for macro_name in macro_names:
-        print("MACRO NAME PASSED IN SCRIPT===")
-        log_file = macro_name+'_logs_'+str(datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S"))+'.txt'
-        logger, log_file_path = Logger.Logger.setup_logger(log_file)
+        logger.info(
+            f" Running Macro : ****************'{macro_name}'*****************")
+        logger.info(
+            f" Default Params :: browser path : '{default_params['browser_path']}' :: autorun html file path :'{default_params['path_autorun_html']}'")
+        log_file_path = macro_logs_setup(macro_name)
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)
-        macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, logger, log_file_path)
-        print("COMPLETED MACRORUNNER METHOD FOR " + macro_name + " FOR LOG FILE" + log_file_path)
+        macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path)
         close_browser(browser_proc)
 
 
@@ -106,9 +117,9 @@ if __name__ == '__main__':
     parser.add_argument('--incognito', action='store_true', help='Open Chrome in incognito mode')
 
     cmd_args = parser.parse_args()
-
+    logger.info(f" Parameters passed :: macro name : '{cmd_args.macro}'")
     try:
         run_macros(cmd_args)
     except Exception as e:
-        print(f"Error: {e}")
+        logger.error(f" Error*** : '{e}'")
         sys.exit(-1)

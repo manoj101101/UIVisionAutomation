@@ -1,0 +1,5 @@
+Status=OK
+###
+[status] Playing macro ExpressBookingE2EJourneyWithoutFinance
+[info] Executing:  | open | https://ad-customer-website.uat.ackodrive.com/ |  | 
+[info] Macro was stopped manually (Runtime 0.85s)

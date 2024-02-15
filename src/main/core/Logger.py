@@ -6,23 +6,18 @@ import sys
 class Logger:
 
     @staticmethod
-    def setup_logger(log_file):
-        projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))));
-        log_folder = os.path.join(projectpath, 'logs/')
-
-        if not os.path.exists(log_folder):
-            os.makedirs(log_folder)
-
-        log_file_path = log_folder + log_file
+    def setup_logger():
         logger = logging.getLogger(__name__)
         logger.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s - [%(threadName)-12.12s] - %(levelname)s - %(message)s')
+        logger.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
-        stream_handler = logging.StreamHandler(sys.stdout);
+        stream_handler = logging.StreamHandler(sys.stdout)
         stream_handler.setFormatter(formatter)
         logger.addHandler(stream_handler)
-
-        return logger, log_file_path
+        logger.info(
+            f" Logger Initialized :  Stream Logger : logs will be visible on console' {logger}'")
+        return logger
 
 
 def get_logger(self):

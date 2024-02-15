@@ -1,0 +1,22 @@
+Status=OK
+###
+[status] Playing macro verifySuccessfulLogout
+[info] Executing:  | comment | bringIDEandBrowserToBackground //  |  | 
+[info] Executing:  | echo | running on harddrive************************ | green | 
+[echo] running on harddrive************************
+[info] Executing:  | open | https://ad-customer-website.uat.ackodrive.com/ |  | 
+[info] Executing:  | store | true |  | 
+[info] Executing:  | verifyElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | run | verifySuccessfulLogin |  | 
+[status] Running 'verifySuccessfulLogin', called by 'verifySuccessfulLogout'
+[status] Playing macro verifySuccessfulLogin
+[info] Executing:  | waitForElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | click | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | csvRead | login.csv |  | 
+[info] Executing:  | store | ${!COL2} | phoneNumber | 
+[info] Executing:  | store | ${!COL4} | query | 
+[info] Executing:  | type | xpath=//*[@data-testid='mobilenumber'] | ${phoneNumber} | 
+[info] Executing:  | click | xpath=//*[@data-testid='get_otp_cta'] |  | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Macro was stopped manually (Runtime 1.93s)
