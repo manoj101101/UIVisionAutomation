@@ -13,9 +13,9 @@ class Logger:
         log_folder = os.path.join(projectpath, 'logs')
         print("logfolder==")
         print(log_folder)
-        
-        if not os.path.exists(log_folder):
-            os.makedirs(log_folder)
+
+        # if not os.path.exists(log_folder):
+        #     os.makedirs(log_folder)
 
         log_file_path = log_folder + log_file
         # log_file_path = os.path.join(log_folder, log_file)
