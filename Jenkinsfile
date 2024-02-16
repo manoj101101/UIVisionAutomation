@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(defaultValue: "ERROR*** :: INVALID MACRO NAME :: ENTER THE MACRO NAMES IN JENKINS PIPILINE", description: 'Enter macro names', name: 'MACRO_LIST')
+        string(defaultValue: "ENTER THE MACRO NAMES IN JENKINS PIPILINE", description: 'Enter macro names', name: 'MACRO_LIST')
     }
 
     stages {
