@@ -74,11 +74,13 @@ def macrorunner(macro_params, log_file_path, browser_proc):
         else:
             status_text = f"Macro '{macro_params['macro']}' failed."
             logger.error(status_text)
+            raise Exception(status_text)
 
     else:
         status_text = f"Macro '{macro_params['macro']}' did not complete within the time given: {macro_params['timeout_seconds']} seconds"
         logger.error(status_text)
         browser_proc.kill()
+        raise Exception(status_text)
 
 
 def macro_logs_setup(macro_name):
@@ -97,6 +99,7 @@ def macro_logs_setup(macro_name):
 
 # function run macros...
 def run_macros(args):
+    global error_status
     user_path = os.path.expanduser('~')
     macro_names = args.macro
     default_params = {
@@ -117,11 +120,17 @@ def run_macros(args):
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)
-        macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path, browser_proc)
+        try:
+            macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path, browser_proc)
+        except Exception as e:
+            logger.error(f"Error running macro '{macro_name}': {e}")
+            return False
+
         close_browser(browser_proc)
 
+    return True
 
-# main thread initializiation...
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run multiple UI-Vision macros.')
     parser.add_argument('--macro', type=str, nargs='+', help='Names of the macros to run')
@@ -129,8 +138,7 @@ if __name__ == '__main__':
 
     cmd_args = parser.parse_args()
     logger.info(f" Parameters passed :: macro name : '{cmd_args.macro}'")
-    try:
-        run_macros(cmd_args)
-    except Exception as e:
-        logger.error(f" Error*** : '{e}'")
+    success = run_macros(cmd_args)
+
+    if not success:
         sys.exit(-1)
