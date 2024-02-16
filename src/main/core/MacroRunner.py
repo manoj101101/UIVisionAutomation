@@ -55,21 +55,22 @@ def check_macro_status(log_file_path, macro_name):
         status_text = f.readline()
         if 'Status=OK' in status_text:
             logger.info(
-                f" Status of Macro execution : '{macro_name}' passed")
+                f" Execution completed for macro : '{macro_name}' : Status :  PASSED")
         else:
             logger.error(
-                f" Status of Macro execution : '{macro_name}' failed")
+                 f" Execution completed for macro : '{macro_name}' : Status :  FAILED")
+            logger.info(
+                f" Check logs file for failure reason : '{log_file_path}'")
+            logger.info(f.readlines())
             return -1
 
 
 def macrorunner(macro_params, log_file_path):
     assert os.path.exists(macro_params['path_autorun_html'])
     logger.info(
-        f" Log File will show up at {log_file_path}")
+        f" Log File will be generated at location : {log_file_path}")
     try:
         if wait_for_completion(log_file_path, macro_params['timeout_seconds']):
-            logger.info(
-                f" Macro '{macro_params['macro']}' execution is completed within the time given: {macro_params['timeout_seconds']} seconds")
             if check_macro_status(log_file_path, macro_params['macro']) == -1:
                 return -1
         else:
@@ -77,11 +78,11 @@ def macrorunner(macro_params, log_file_path):
                 f" Macro '{macro_params['macro']}' did not complete within the time given: {macro_params['timeout_seconds']} seconds")
             return -1
     except Exception as excep:
-        logger.error(
+        logger.info(
             f" Exception occured during the execution of macro : '{macro_params['macro']}'")
         logger.error(
             f"'{excep}'")
-        return 1
+        return -1
 
 
 def macro_logs_setup(macro_name):
