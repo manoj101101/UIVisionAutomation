@@ -16,6 +16,7 @@ pipeline {
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                         dir(workspacePath) {
                             def exitCode = sh(script: scriptCommand, returnStatus: true)
+                            echo ">>>>>>>>> ERRORCODE >>>>> ${exitCode}"
                             if (exitCode != 0) {
                                 error "Macro Failed!!!"
                             }
