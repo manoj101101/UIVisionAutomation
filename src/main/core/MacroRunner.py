@@ -124,9 +124,9 @@ def run_macros(args):
             macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path, browser_proc)
         except Exception as e:
             logger.error(f"Error running macro '{macro_name}': {e}")
-            return False
-
-        close_browser(browser_proc)
+            continue
+        finally:
+            close_browser(browser_proc)
 
     return True
 

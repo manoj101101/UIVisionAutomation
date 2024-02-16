@@ -13,7 +13,7 @@ pipeline {
                     def pythonExecutable = "/usr/local/bin/python3.12"
                     def scriptCommand = "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
 
-                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                         dir(workspacePath) {
                             def exitCode = sh(script: scriptCommand, returnStatus: true)
                             if (exitCode != 0) {
