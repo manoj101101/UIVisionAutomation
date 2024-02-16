@@ -58,10 +58,9 @@ def check_macro_status(log_file_path, macro_name):
             logger.info(f" Macro '{macro_name}' passed.")
         else:
             logger.error(f"Macro '{macro_name}' failed. See logs for details.")
-            sys.exit(-2)
 
 
-def macrorunner(macro_params, log_file_path):
+def macrorunner(macro_params, log_file_path, browser_proc):
     assert os.path.exists(macro_params['path_autorun_html'])
     logger.info(f" Log File will show up at {log_file_path}")
 
@@ -70,7 +69,7 @@ def macrorunner(macro_params, log_file_path):
     else:
         status_text = f"Macro '{macro_params['macro']}' did not complete within the time given: {macro_params['timeout_seconds']} seconds"
         logger.error(status_text)
-        sys.exit(-2)
+        browser_proc.kill()
 
 
 def macro_logs_setup(macro_name):
@@ -99,9 +98,9 @@ def run_macros(args):
 
     for macro_name in macro_names:
         logger.info(
-            f"************************************************************************" 
+            f"****************************************"
             f" Running Macro : '{macro_name}'"
-            f"************************************************************************")
+            f"****************************************")
 
         logger.info(
             f" Default Params :: browser path : '{default_params['browser_path']}' :: autorun html file path :'{default_params['path_autorun_html']}'")
@@ -109,7 +108,7 @@ def run_macros(args):
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)
-        macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path)
+        macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path, browser_proc)
         close_browser(browser_proc)
 
 

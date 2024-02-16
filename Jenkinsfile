@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(defaultValue: "ENTER THE MACRO NAMES IN JENKINS PIPILINE", description: 'Enter macro names', name: 'MACRO_LIST')
+        string(defaultValue: "", description: 'Enter Macro Names', name: 'MACRO_LIST')
     }
 
     stages {
