@@ -51,30 +51,37 @@ def wait_for_completion(log_file_path, timeout_seconds):
 
 
 def check_macro_status(log_file_path, macro_name):
-    logger.info(f" Check status of macro execution : macro : '{macro_name}'")
     with open(log_file_path) as f:
         status_text = f.readline()
         if 'Status=OK' in status_text:
-            logger.info(f" Macro '{macro_name}' passed.")
+            logger.info(
+                f" Status of Macro execution : '{macro_name}' passed")
         else:
-            logger.info(f"Macro '{macro_name}' failed")
-            return 1
+            logger.error(
+                f" Status of Macro execution : '{macro_name}' failed")
+            return -1
 
 
 def macrorunner(macro_params, log_file_path):
     assert os.path.exists(macro_params['path_autorun_html'])
-    logger.info(f" Log File will show up at {log_file_path}")
+    logger.info(
+        f" Log File will show up at {log_file_path}")
     try:
         if wait_for_completion(log_file_path, macro_params['timeout_seconds']):
-            if check_macro_status(log_file_path, macro_params['macro']) == 1:
-                logger.info(f" MACRO : '{macro_params['macro']} FAILED INSIDE CHECK MACRO FUNCTION")
-                return 1
+            logger.info(
+                f" Macro '{macro_params['macro']}' execution is completed within the time given: {macro_params['timeout_seconds']} seconds")
+            if check_macro_status(log_file_path, macro_params['macro']) == -1:
+                return -1
         else:
-            logger.info(f" MACRO : '{macro_params['macro']} FAILED INSIDE WAIT FOR COMPLETION FUNCTION")
-            return exit(2)
+            logger.error(
+                f" Macro '{macro_params['macro']}' did not complete within the time given: {macro_params['timeout_seconds']} seconds")
+            return -1
     except Exception as excep:
-        logger.error(f" EXCEPTION OCCURED INSIDE TRY BLOCK : '{excep}'")
-        return exit(2)
+        logger.error(
+            f" Exception occured during the execution of macro : '{macro_params['macro']}'")
+        logger.error(
+            f"'{excep}'")
+        return 1
 
 
 def macro_logs_setup(macro_name):
@@ -112,10 +119,8 @@ def run_macros(args):
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
                                     args)
         stat = macrorunner({'macro': macro_name, **default_params, 'incognito': args.incognito}, log_file_path)
-        print("STATUS OF MACRO AFTER RUN " + macro_name + " IS : ")
-        print(stat)
-        if stat == 1:
-            is_run_successful = 1
+        if stat == -1:
+            is_run_successful = -1
         close_browser(browser_proc)
 
     return is_run_successful
@@ -131,6 +136,4 @@ if __name__ == '__main__':
     logger.info(f" Parameters passed :: macro name : '{cmd_args.macro}'")
 
     flag = (run_macros(cmd_args))
-    print("IS RUN SUCCESS :")
-    print(flag)
     sys.exit(flag)

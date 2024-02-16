@@ -17,12 +17,20 @@ pipeline {
                         dir(workspacePath) {
                             def exitCode = sh(script: scriptCommand, returnStatus: true)
                             if (exitCode != 0) {
-                                error "Macro Failed!!!"
+                                error "Failure!!!"
                             }
                         }
                     }
                 }
             }
+        }
+    }
+    post {
+        success {
+            echo '************** Pipeline ran successfully ***************'
+        }
+        failure {
+            echo '******************* Pipeline failed ********************'
         }
     }
 }
