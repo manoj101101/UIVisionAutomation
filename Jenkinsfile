@@ -18,6 +18,8 @@ pipeline {
                             def exitCode = sh(script: scriptCommand, returnStatus: true)
                             if (exitCode != 0) {
                                 error "Failure!!!"
+                                error "One of the macro did not pass"
+                                error "Check the logs for current run"
                             }
                         }
                     }
@@ -27,10 +29,10 @@ pipeline {
     }
     post {
         success {
-            echo '************** Pipeline ran successfully ***************'
+            echo 'Pipeline Ran Successfully'
         }
         failure {
-            echo '******************* Pipeline failed ********************'
+            echo 'Pipeline Failed'
         }
     }
 }
