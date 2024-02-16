@@ -29,21 +29,21 @@ def open_browser(browser_path, path, macro_params, incognito=False):
     )
     proc = subprocess.Popen([browser_path, args])
     logger.info(
-        f"Strated a parent process to open browser and run macro ::: '{macro_params['macro']}'\n")
+        f"Strated a parent process to open browser and run macro -> '{macro_params['macro']}'\n")
     logger.info(
-        f"Parent process id ::: '{proc.pid}'\n")
+        f"Parent process id -> '{proc.pid}'\n")
     return proc
 
 
 # function to kill the browser process...
 def close_browser(proc):
-    logger.info(f" Killig Parent process pid : '{proc.pid}'\n")
+    logger.info(f" Killig Parent process pid -> '{proc.pid}'\n")
     proc.kill()
 
 
 def wait_for_completion(log_file_path, timeout_seconds):
     status_runtime = 0
-    logger.info(f"Waiting for macro to finish the execution ::: Timeout value ::: '{timeout_seconds}'\n")
+    logger.info(f"Waiting for macro to finish the execution :: Timeout value :: '{timeout_seconds}'\n")
     while not os.path.exists(log_file_path) and status_runtime < timeout_seconds:
         time.sleep(1)
         status_runtime += 1
@@ -55,10 +55,10 @@ def check_macro_status(log_file_path, macro_name):
         status_text = f.readline()
         if 'Status=OK' in status_text:
             logger.info(
-                f"Execution completed for macro ::: '{macro_name}' :: Status ::  PASSED\n")
+                f"Execution completed for macro :: '{macro_name}' :: Status ::  PASSED\n")
         else:
             logger.error(
-                 f"Execution completed for macro ::: '{macro_name}' ::: Status :  FAILED\n")
+                 f"Execution completed for macro :: '{macro_name}' :: Status ::  FAILED\n")
             try:
                 error_line = next(line.strip() for line in open(log_file_path) if '[error]' in line.lower())
                 logger.error(
@@ -119,9 +119,9 @@ def run_macros(args):
 
     for macro_name in macro_names:
         logger.info(
-            f"Running Macro ::: ************'{macro_name}'*************\n")
+            f"Running Macro : ************'{macro_name}'*************\n")
         logger.info(
-            f"Default Params ::: \n browser path ::: '{default_params['browser_path']}' \n autorun html file path ::: '{default_params['path_autorun_html']}'")
+            f"Default Params :\nbrowser path -> '{default_params['browser_path']}'\nautorun html file path -> '{default_params['path_autorun_html']}'")
         log_file_path = macro_logs_setup(macro_name)
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     parser.add_argument('--incognito', action='store_true', help='Open Chrome in incognito mode')
 
     cmd_args = parser.parse_args()
-    logger.info(f"Parameters passed ::: macro name ::: '{cmd_args.macro}'\n")
+    logger.info(f"Parameters passed :\nmacros name -> '{cmd_args.macro}'\n")
 
     flag = (run_macros(cmd_args))
     sys.exit(flag)
