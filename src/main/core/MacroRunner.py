@@ -51,21 +51,30 @@ def wait_for_completion(log_file_path, timeout_seconds):
 
 
 def check_macro_status(log_file_path, macro_name):
-    logger.info(f" Check status of macro execution : macro : '{macro_name}'")
+    logger.info(f"Checking status of macro execution: {macro_name}")
+
     with open(log_file_path) as f:
         status_text = f.readline()
+
         if 'Status=OK' in status_text:
-            logger.info(f" Macro '{macro_name}' passed.")
+            logger.info(f"Macro '{macro_name}' passed.")
+            return True
         else:
             logger.error(f"Macro '{macro_name}' failed. See logs for details.")
+            return False
 
 
 def macrorunner(macro_params, log_file_path, browser_proc):
     assert os.path.exists(macro_params['path_autorun_html'])
-    logger.info(f" Log File will show up at {log_file_path}")
+    logger.info(f"Log File will show up at {log_file_path}")
 
     if wait_for_completion(log_file_path, macro_params['timeout_seconds']):
-        check_macro_status(log_file_path, macro_params['macro'])
+        if check_macro_status(log_file_path, macro_params['macro']):
+            logger.info(f"Macro '{macro_params['macro']}' passed.")
+        else:
+            status_text = f"Macro '{macro_params['macro']}' failed."
+            logger.error(status_text)
+
     else:
         status_text = f"Macro '{macro_params['macro']}' did not complete within the time given: {macro_params['timeout_seconds']} seconds"
         logger.error(status_text)
@@ -98,9 +107,9 @@ def run_macros(args):
 
     for macro_name in macro_names:
         logger.info(
-            f"****************************"
+            f"******************"
             f"Running Macro : '{macro_name}'"
-            f"****************************")
+            f"******************")
 
         logger.info(
             f" Default Params :: browser path : '{default_params['browser_path']}' :: autorun html file path :'{default_params['path_autorun_html']}'")
