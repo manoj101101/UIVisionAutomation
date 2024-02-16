@@ -29,15 +29,15 @@ def open_browser(browser_path, path, macro_params, incognito=False):
     )
     proc = subprocess.Popen([browser_path, args])
     logger.info(
-        f"Strated a parent process to open browser and run macro -> '{macro_params['macro']}'\n")
+        f"Strated a parent process to open browser and run macro \n-> '{macro_params['macro']}'\n")
     logger.info(
-        f"Parent process id -> '{proc.pid}'\n")
+        f"Parent process id \n-> '{proc.pid}'\n")
     return proc
 
 
 # function to kill the browser process...
 def close_browser(proc):
-    logger.info(f" Killig Parent process pid -> '{proc.pid}'\n")
+    logger.info(f" Killig Parent process pid \n-> '{proc.pid}'\n")
     proc.kill()
 
 
@@ -55,27 +55,27 @@ def check_macro_status(log_file_path, macro_name):
         status_text = f.readline()
         if 'Status=OK' in status_text:
             logger.info(
-                f"Execution completed for macro :: '{macro_name}' :: Status ::  PASSED\n")
+                f"Execution completed for macro :: '{macro_name}' \nStatus ->  PASSED\n")
         else:
             logger.error(
-                 f"Execution completed for macro :: '{macro_name}' :: Status ::  FAILED\n")
+                 f"Execution completed for macro :: '{macro_name}' \nStatus ->  FAILED\n")
             try:
                 error_line = next(line.strip() for line in open(log_file_path) if '[error]' in line.lower())
                 logger.error(
-                    f"Error ::: '{error_line}'\n")
+                    f"Error \n-> '{error_line}'\n")
             except StopIteration:
                 print(" ")
                 logger.info(
                     f"Not able to find any error lines please re-verify the log file\n")
                 logger.info(
-                    f"Log File Location :: {log_file_path}\n")
+                    f"Log File Location \n-> {log_file_path}\n")
             return -1
 
 
 def macrorunner(macro_params, log_file_path):
     assert os.path.exists(macro_params['path_autorun_html'])
     logger.info(
-        f"Log File will be generated at location ::: {log_file_path}\n")
+        f"Log File will be generated at location \n-> {log_file_path}\n")
     try:
         if wait_for_completion(log_file_path, macro_params['timeout_seconds']):
             if check_macro_status(log_file_path, macro_params['macro']) == -1:
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     parser.add_argument('--incognito', action='store_true', help='Open Chrome in incognito mode')
 
     cmd_args = parser.parse_args()
-    logger.info(f"Parameters passed :\nmacros name -> '{cmd_args.macro}'\n")
+    logger.info(f"Parameters passed : macros name \n-> '{cmd_args.macro}'\n")
 
     flag = (run_macros(cmd_args))
     sys.exit(flag)
