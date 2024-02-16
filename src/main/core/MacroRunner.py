@@ -98,9 +98,9 @@ def run_macros(args):
 
     for macro_name in macro_names:
         logger.info(
-            f"****************************************"
-            f" Running Macro : '{macro_name}'"
-            f"****************************************")
+            f"****************************"
+            f"Running Macro : '{macro_name}'"
+            f"****************************")
 
         logger.info(
             f" Default Params :: browser path : '{default_params['browser_path']}' :: autorun html file path :'{default_params['path_autorun_html']}'")

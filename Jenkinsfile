@@ -11,20 +11,26 @@ pipeline {
                 script {
                     def workspacePath = "${WORKSPACE}/src/main/core/"
                     def pythonExecutable = "/usr/local/bin/python3.12"
-                    dir(workspacePath) {
-                        sh "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+                    def scriptCommand = "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
+
+                    catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                        dir(workspacePath) {
+                            def exitCode = sh(script: scriptCommand, returnStatus: true)
+                            if (exitCode != 0) {
+                                error "Failed to execute the Python script. Exit code: ${exitCode}"
+                            }
+                        }
                     }
                 }
             }
         }
     }
-
     post {
         success {
-            echo '************************Pipeline ran successfully************************'
+            echo '************** Pipeline ran successfully ***************'
         }
         failure {
-            echo '**************************Pipeline failed********************************'
+            echo '******************* Pipeline failed ********************'
         }
     }
 }
