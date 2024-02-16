@@ -60,8 +60,13 @@ def check_macro_status(log_file_path, macro_name):
             logger.error(
                  f" Execution completed for macro : '{macro_name}' : Status :  FAILED")
             logger.info(
-                f" Check logs file for failure reason : '{log_file_path}'")
-            logger.info(f.readlines())
+                f" Check the log file: '{log_file_path}'")
+            try:
+                error_line = next(line.strip() for line in open(log_file_path) if '[error]' in line.lower())
+                logger.error(
+                    f" Error occured at : '{error_line}'")
+            except StopIteration:
+                print(" Not able to find any error lines please re-verify the log file")
             return -1
 
 
