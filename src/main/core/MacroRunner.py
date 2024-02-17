@@ -37,7 +37,7 @@ def open_browser(browser_path, path, macro_params, incognito=False):
 
 # function to kill the browser process...
 def close_browser(proc):
-    logger.info(f" Killig Parent process pid -> '{proc.pid}'")
+    logger.info(f"Killig Parent process pid -> '{proc.pid}'\n")
     proc.kill()
 
 
@@ -64,7 +64,6 @@ def check_macro_status(log_file_path, macro_name):
                 logger.error(
                     f"Error -> '{error_line}'")
             except StopIteration:
-                print(" ")
                 logger.info(
                     f"Not able to find any error lines please re-verify the log file")
                 logger.info(
@@ -94,7 +93,7 @@ def macrorunner(macro_params, log_file_path):
 
 def macro_logs_setup(macro_name):
     logger.info(
-        f" '{macro_name}' execution logs will be stored under UI Vision project directory in /logs folder")
+        f"'{macro_name}' execution logs will be stored under UI Vision project directory in /logs folder")
     log_file = macro_name + '_logs_' + str(datetime.datetime.now().strftime("%m-%d-%Y_%H_%M_%S")) + '.txt'
     projectpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
     log_folder = os.path.join(projectpath, 'logs/')

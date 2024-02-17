@@ -16,7 +16,7 @@ class Logger:
         stream_handler.setFormatter(formatter)
         logger.addHandler(stream_handler)
         logger.info(
-            f"\nLogger Initialized :  Stream Logger : logs will be visible on console\n")
+            f"Logger Initialized :  Stream Logger : logs will be visible on console")
         return logger
 
 
