@@ -37,7 +37,7 @@ def open_browser(browser_path, path, macro_params, incognito=False):
 
 # function to kill the browser process...
 def close_browser(proc):
-    logger.info(f"Killig Parent process pid -> '{proc.pid}'\n")
+    logger.info(f"Killig Parent process pid -> '{proc.pid}'" + "\n")
     proc.kill()
 
 
@@ -119,7 +119,7 @@ def run_macros(args):
 
     for macro_name in macro_names:
         logger.info(
-            f"\nRunning Macro : ************'{macro_name}'*************")
+            "\n" + f"Running Macro : ************'{macro_name}'*************")
         logger.info(
             f"Default Params :browser path -> '{default_params['browser_path']}'autorun html file path -> '{default_params['path_autorun_html']}'")
         log_file_path = macro_logs_setup(macro_name)
