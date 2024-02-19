@@ -47,7 +47,9 @@ def wait_for_completion(log_file_path, timeout_seconds):
     while not os.path.exists(log_file_path) and status_runtime < timeout_seconds:
         time.sleep(1)
         status_runtime += 1
-    return status_runtime < timeout_seconds
+
+    logger.error(f"Macro did not complete within the given timeout: {timeout_seconds} seconds")
+    return False
 
 
 def check_macro_status(log_file_path, macro_name):
@@ -71,7 +73,7 @@ def check_macro_status(log_file_path, macro_name):
             return -1
 
 
-def macrorunner(macro_params, log_file_path):
+def macrorunner(macro_params, log_file_path, browser_proc):
     assert os.path.exists(macro_params['path_autorun_html'])
     logger.info(
         f"Log File will be generated at location -> {log_file_path}")
@@ -133,7 +135,6 @@ def run_macros(args):
     return is_run_successful
 
 
-# main thread initializiation...
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run multiple UI-Vision macros.')
     parser.add_argument('--macro', type=str, nargs='+', help='Names of the macros to run')
