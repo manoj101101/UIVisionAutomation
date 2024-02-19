@@ -16,9 +16,10 @@ pipeline {
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                         dir(workspacePath) {
                             def exitCode = sh(script: scriptCommand, returnStatus: true)
-                            echo ">>>>>>>>> ERRORCODE >>>>> ${exitCode}"
                             if (exitCode != 0) {
-                                error "Macro Failed!!!"
+                                error "Failure!!!"
+                                error "One of the macro did not pass"
+                                error "Check the logs for current run"
                             }
                         }
                     }
@@ -28,10 +29,10 @@ pipeline {
     }
     post {
         success {
-            echo '************** Pipeline ran successfully ***************'
+            echo 'Pipeline Ran Successfully'
         }
         failure {
-            echo '******************* Pipeline failed ********************'
+            echo 'Pipeline Failed'
         }
     }
 }
