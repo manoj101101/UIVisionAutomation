@@ -1,0 +1,65 @@
+Status=OK
+###
+[status] Playing macro verifySuccessfulLogout
+[info] Executing:  | open | https://ad-customer-website.uat.ackodrive.com/ |  | 
+[info] Executing:  | store | true |  | 
+[info] Executing:  | verifyElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | run | verifySuccessfulLogin |  | 
+[status] Running 'verifySuccessfulLogin', called by 'verifySuccessfulLogout'
+[status] Playing macro verifySuccessfulLogin
+[info] Executing:  | waitForElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | click | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | csvRead | login.csv |  | 
+[info] Executing:  | store | ${!COL2} | phoneNumber | 
+[info] Executing:  | store | ${!COL4} | query | 
+[info] Executing:  | type | xpath=//*[@data-testid='mobilenumber'] | ${phoneNumber} | 
+[info] Executing:  | click | xpath=//*[@data-testid='get_otp_cta'] |  | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | selectWindow | TAB=OPEN | https://workspace.uat.ackodrive.com/explorer/play/ | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | store | true |  | 
+[info] Executing:  | verifyElementPresent | xpath=//label[text()='Username:'] |  | 
+[info] Executing:  | if | ${!statusOK} == true |  | 
+[info] Executing:  | type | xpath=//*[@id='id_username'] | ackodrivetwteam@acko.tech | 
+[info] Executing:  | type | xpath=//*[@id='id_password'] | acko123 | 
+[info] Executing:  | click | xpath=//input[@value='Log in'] |  | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | end |  |  | 
+[info] Executing:  | waitForElementPresent | xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea |  | 
+[info] Executing:  | type | xpath=//*[@id="editor"]/div[2]/div[2]/div/div[1]/textarea | ${query} | 
+[info] Executing:  | click | xpath=//*[@id='refresh_play_button'] |  | 
+[info] Executing:  | storeText | xpath=//*[@id="preview"]/tbody/tr/td[2] | otp | 
+[info] Executing:  | echo | ${otp} | green | 
+[echo] 1295
+[info] Executing:  | executeScript_Sandbox | var array = ${otp}; return array; | ary | 
+[info] Executing:  | echo | ${ary} | green | 
+[echo] 1295
+[info] Executing:  | executeScript_Sandbox | var num=${ary[0]}; return num; | num1 | 
+[info] Executing:  | executeScript_Sandbox | var num=${ary[1]}; return num; | num2 | 
+[info] Executing:  | executeScript_Sandbox | var num=${ary[2]}; return num; | num3 | 
+[info] Executing:  | executeScript_Sandbox | var num=${ary[3]}; return num; | num4 | 
+[info] Executing:  | deleteAllCookies |  |  | 
+[info] Executing:  | selectWindow | tab=close |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Please enter verification code. Digit 1'] | ${num1} | 
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 2'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 2'] | ${num2} | 
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 3'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 3'] | ${num3} | 
+[info] Executing:  | waitForElementVisible | xpath=//input[@aria-label='Digit 4'] |  | 
+[info] Executing:  | type | xpath=//input[@aria-label='Digit 4'] | ${num4} | 
+[info] Executing:  | pause | 2000 |  | 
+[info] Executing:  | click | xpath=//*[@id="profileEdit"] |  | 
+[info] Executing:  | assertText | xpath=//*[@id='__next']/div/div/div[2]/nav/div[6]/div/div | Logout | 
+[info] Executing:  | echo | ***************************** Verify successful login test run is successful *******************  | green | 
+[echo] ***************************** Verify successful login test run is successful *******************
+[status] Finished running 'verifySuccessfulLogin', returning to 'verifySuccessfulLogout'
+[status] Playing macro verifySuccessfulLogout
+[info] Executing:  | click | xpath=//*[@id='__next']/div/div/div[2]/nav/div[6]/div/div |  | 
+[info] Executing:  | click | //div[text()='Yes'] |  | 
+[info] Executing:  | else |  |  | 
+[info] Executing:  | pause | 1000 |  | 
+[info] Executing:  | waitForElementPresent | xpath=//div[text()='Login / Signup'] |  | 
+[info] Executing:  | echo | ***************************** Verify successful login test run is successful *******************  | green | 
+[echo] ***************************** Verify successful login test run is successful *******************
+[info] Macro completed (Runtime 18.44s)
