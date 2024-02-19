@@ -60,7 +60,7 @@ def check_macro_status(log_file_path, macro_name):
                 f"Execution completed for macro :: '{macro_name}' Status ->  PASSED")
         else:
             logger.error(
-                 f"Execution completed for macro :: '{macro_name}' Status ->  FAILED")
+                f"Execution completed for macro :: '{macro_name}' Status ->  FAILED")
             try:
                 error_line = next(line.strip() for line in open(log_file_path) if '[error]' in line.lower())
                 logger.error(

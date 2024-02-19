@@ -18,7 +18,3 @@ class Logger:
         logger.info(
             f"Logger Initialized :  Stream Logger : logs will be visible on console")
         return logger
-
-
-def get_logger(self):
-    return self.logger
