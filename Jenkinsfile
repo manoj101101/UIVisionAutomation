@@ -17,9 +17,7 @@ pipeline {
                         dir(workspacePath) {
                             def exitCode = sh(script: scriptCommand, returnStatus: true)
                             if (exitCode != 0) {
-                                error "Failure!!!"
-                                error "One of the macro did not pass"
-                                error "Check the logs for current run"
+                                error "Failure!!! : Macros did not pass : Check the logs for current run"
                             }
                         }
                     }

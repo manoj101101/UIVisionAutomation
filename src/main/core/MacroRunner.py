@@ -29,7 +29,7 @@ def open_browser(browser_path, path, macro_params, incognito=False):
     )
     proc = subprocess.Popen([browser_path, args])
     logger.info(
-        f"Strated a parent process to open browser and run macro -> '{macro_params['macro']}'")
+        f"Started a parent process to open browser and run macro -> '{macro_params['macro']}'")
     logger.info(
         f"Parent process id -> '{proc.pid}'")
     return proc
@@ -119,7 +119,7 @@ def run_macros(args):
 
     for macro_name in macro_names:
         logger.info(
-            f"Running Macro : ************'{macro_name}'*************")
+            f"\nRunning Macro : ************'{macro_name}'*************")
         logger.info(
             f"Default Params :browser path -> '{default_params['browser_path']}'autorun html file path -> '{default_params['path_autorun_html']}'")
         log_file_path = macro_logs_setup(macro_name)
