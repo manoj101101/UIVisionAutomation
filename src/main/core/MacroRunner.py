@@ -48,10 +48,7 @@ def wait_for_completion(log_file_path, timeout_seconds):
     while not os.path.exists(log_file_path) and status_runtime < timeout_seconds:
         time.sleep(1)
         status_runtime += 1
-
-    logger.error(
-        f"Macro did not complete within the given timeout: {timeout_seconds} seconds")
-    return False
+    return status_runtime < timeout_seconds
 
 
 def check_macro_status(log_file_path, macro_name):
