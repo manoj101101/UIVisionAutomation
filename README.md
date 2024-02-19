@@ -1,4 +1,4 @@
-<img width="1440" alt="Screenshot 2024-02-19 at 1 05 31 PM" src="https://github.com/manoj101101/UIVisionAutomation/assets/127084958/5b7890da-67b2-4f20-b0db-7c0ecdf4748b">*** UI Vision Automation Script ***
+*** UI Vision Automation Script ***
 
 ***Tech Stack***
 ** Python + pycharm + Scipting + Command line + Jenkins + Groovy + Git.
