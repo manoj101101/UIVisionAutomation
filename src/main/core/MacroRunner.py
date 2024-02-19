@@ -43,12 +43,14 @@ def close_browser(proc):
 
 def wait_for_completion(log_file_path, timeout_seconds):
     status_runtime = 0
-    logger.info(f"Waiting for macro to finish the execution :: Timeout value :: '{timeout_seconds}'")
+    logger.info(
+        f"Waiting for macro to finish the execution :: Timeout value :: '{timeout_seconds}'")
     while not os.path.exists(log_file_path) and status_runtime < timeout_seconds:
         time.sleep(1)
         status_runtime += 1
 
-    logger.error(f"Macro did not complete within the given timeout: {timeout_seconds} seconds")
+    logger.error(
+        f"Macro did not complete within the given timeout: {timeout_seconds} seconds")
     return False
 
 
@@ -73,7 +75,7 @@ def check_macro_status(log_file_path, macro_name):
             return -1
 
 
-def macrorunner(macro_params, log_file_path, browser_proc):
+def macrorunner(macro_params, log_file_path):
     assert os.path.exists(macro_params['path_autorun_html'])
     logger.info(
         f"Log File will be generated at location -> {log_file_path}")
@@ -141,7 +143,8 @@ if __name__ == '__main__':
     parser.add_argument('--incognito', action='store_true', help='Open Chrome in incognito mode')
 
     cmd_args = parser.parse_args()
-    logger.info(f"Parameters passed : macros name -> '{cmd_args.macro}'")
+    logger.info(
+        f"Parameters passed : macros name -> '{cmd_args.macro}'")
 
     flag = (run_macros(cmd_args))
     sys.exit(flag)
