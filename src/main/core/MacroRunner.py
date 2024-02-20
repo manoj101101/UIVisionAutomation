@@ -59,7 +59,7 @@ def check_macro_status(log_file_path, macro_name):
                 f"Execution completed for macro :: '{macro_name}' Status ->  PASSED")
         else:
             logger.error(
-                 f"Execution completed for macro :: '{macro_name}' Status ->  FAILED")
+                f"Execution completed for macro :: '{macro_name}' Status ->  FAILED")
             try:
                 error_line = next(line.strip() for line in open(log_file_path) if '[error]' in line.lower())
                 logger.error(
@@ -121,7 +121,7 @@ def run_macros(args):
         logger.info(
             "\n" + f"Running Macro : ************'{macro_name}'*************")
         logger.info(
-            f"Default Params :browser path -> '{default_params['browser_path']}'autorun html file path -> '{default_params['path_autorun_html']}'")
+            f"Default Params : browser path -> '{default_params['browser_path']}'autorun html file path -> '{default_params['path_autorun_html']}'")
         log_file_path = macro_logs_setup(macro_name)
         browser_proc = open_browser(default_params['browser_path'], log_file_path,
                                     {'macro': macro_name, 'path_autorun_html': default_params['path_autorun_html']},
@@ -141,7 +141,7 @@ if __name__ == '__main__':
 
     cmd_args = parser.parse_args()
     logger.info(
-        f"Parameters passed : macros name -> '{cmd_args.macro}'")
+        f"MacroList : macros name -> '{cmd_args.macro}'")
 
     flag = (run_macros(cmd_args))
     sys.exit(flag)
