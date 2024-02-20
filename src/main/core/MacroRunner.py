@@ -37,8 +37,9 @@ def open_browser(browser_path, path, macro_params, incognito=False):
 
 # function to kill the browser process...
 def close_browser(proc):
-    logger.info(f"Killig Parent process pid -> '{proc.pid}'" + "\n")
+    logger.info(f"Killig Parent process pid -> '{proc.pid}'")
     proc.kill()
+    logger.info('\n\n' + f"Run Completed -> '{proc.pid}'")
 
 
 def wait_for_completion(log_file_path, timeout_seconds):
