@@ -115,7 +115,7 @@ def run_macros(args):
     default_params = {
         'timeout_seconds': 100,
         'path_autorun_html': user_path + '/Downloads/ui.vision.html',
-        'browser_path': '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+        'browser_path': '/opt/google/chrome/google-chrome',
     }
 
     for macro_name in macro_names:
