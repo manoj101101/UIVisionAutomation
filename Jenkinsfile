@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'agent-uivision' }
 
     parameters {
         string(defaultValue: "", description: 'Enter Macro Names', name: 'MACRO_LIST')
@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     def workspacePath = "${WORKSPACE}/src/main/core/"
-                    def pythonExecutable = "/usr/local/bin/python3.12"
+                    def pythonExecutable = "/usr/bin/python3"
                     def scriptCommand = "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
 
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
