@@ -1,7 +1,8 @@
 pipeline {
-    agent { label 'agent-uivision' }
+    agent { label ${NODE_LABEL_NAME} }
 
     parameters {
+        string(defaultValue: "agent-uivision", description: 'Enter Node Label Name Where You Want to Run UIVIsion', name: 'NODE_LABEL_NAME')
         string(defaultValue: "", description: 'Enter Macro Names', name: 'MACRO_LIST')
     }
 
