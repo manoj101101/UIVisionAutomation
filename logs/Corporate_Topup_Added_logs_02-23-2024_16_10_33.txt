@@ -1,0 +1,8 @@
+Status=Error: timeout reached when looking for element 'xpath=//*[@id="__next"]/div/header/div/div[4]/div/button'
+###
+[status] Playing macro /Users/manvi.bhardwaj/Desktop/uivision/macros/Corporate_Topup_Added.json
+[info] Executing:  | open | https://www.ackodev.com/ |  | 
+[info] Executing:  | csvRead | data.csv |  | 
+[info] Executing:  | store | ${!COL2} | phoneNumber | 
+[info] Executing:  | click | xpath=//*[@id="__next"]/div/header/div/div[4]/div/button |  | 
+[error] timeout reached when looking for element 'xpath=//*[@id="__next"]/div/header/div/div[4]/div/button'

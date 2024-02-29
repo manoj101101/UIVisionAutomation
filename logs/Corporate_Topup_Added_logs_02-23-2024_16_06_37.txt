@@ -1,0 +1,6 @@
+Status=Error: E325: csv file 'data.csv' does not exist
+###
+[status] Playing macro /Users/manvi.bhardwaj/Desktop/uivision/macros/Corporate_Topup_Added.json
+[info] Executing:  | open | https://www.ackodev.com/ |  | 
+[info] Executing:  | csvRead | data.csv |  | 
+[error] E325: csv file 'data.csv' does not exist
