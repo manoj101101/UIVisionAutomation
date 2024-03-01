@@ -34,7 +34,7 @@ pipeline {
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
-                reportDir: 'path/to/logs',
+                reportDir: '${WORKSPACE}/',
                 reportFiles: 'myLogFile.html',
                 reportName: 'UI Vision Report'
             ])
