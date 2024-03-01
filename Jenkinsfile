@@ -20,15 +20,12 @@ pipeline {
                             def exitCode = sh(script: "${scriptCommand} 2> ${errorLogFile}", returnStatus: true)
                             if (exitCode != 0) {
                                 error "Failure!!! : Macros did not pass : Check the logs for current run"
-                                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/libs/jenkins/workspace/Health_UIVision', reportFiles: 'jen.html', reportName: 'HTML Report', reportTitles: 'Failure!!! : Macros did not pass : Check the logs for current run', useWrapperFileDirectly: true])            }        }
-
                             }
                         }
                     }
                 }
             }
         }
-        
     }
     post {
         success {
