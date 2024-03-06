@@ -14,7 +14,6 @@ pipeline {
                     def pythonExecutable = "/usr/bin/python3"
                     def scriptCommand = "${pythonExecutable} MacroRunner.py --macro ${MACRO_LIST}"
                     def errorLogFile = "${WORKSPACE}/health_error_logs.txt"
-                    sh 'uivision export health_error_logs.html'
 
                     catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                         dir(workspacePath) {
@@ -29,16 +28,6 @@ pipeline {
         }
     }
     post {
-        always{
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: '${WORKSPACE}/',
-                reportFiles: 'myLogFile.html',
-                reportName: 'UI Vision Report'
-            ])
-        }
         success {
             echo 'Pipeline Ran Successfully'
         }
